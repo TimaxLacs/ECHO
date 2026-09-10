@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echo.agent/protocol/echo.v1/slots/memory.json",
+  "title": "memory",
+  "description": "speaker_id приходит в ctx. Слот не вызывает LLM, чтобы «красиво записать».",
+  "oneOf": [
+    {
+      "title": "memory.core",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {}
+    },
+    {
+      "title": "memory.recall",
+      "type": "object",
+      "required": ["query"],
+      "additionalProperties": true,
+      "properties": { "query": { "type": "string" } }
+    },
+    {
+      "title": "memory.remember",
+      "type": "object",
+      "required": ["note"],
+      "additionalProperties": true,
+      "properties": { "note": { "type": "string", "minLength": 1 } }
+    }
+  ]
+}

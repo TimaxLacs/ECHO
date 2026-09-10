@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echo.agent/protocol/echo.v1/envelope.json",
+  "title": "Echo envelope v1",
+  "description": "JSON-RPC 2.0 плюс контекст хода. Незнакомые поля клиент обязан игнорировать.",
+  "type": "object",
+  "required": ["jsonrpc", "method"],
+  "properties": {
+    "jsonrpc": { "const": "2.0" },
+    "id": { "type": ["string", "number", "null"] },
+    "method": {
+      "type": "string",
+      "pattern": "^(hello|probe|identity\\.[a-z_]+|llm\\.[a-z_]+|stt\\.[a-z_]+|tts\\.[a-z_]+|memory\\.[a-z_]+|tools\\.[a-z_]+|channel\\.[a-z_]+)$"
+    },
+    "params": {
+      "type": "object",
+      "required": ["protocol"],
+      "properties": {
+        "protocol": { "const": "echo.v1" },
+        "ctx": { "$ref": "#/$defs/ctx" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "ctx": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "turn_id": { "type": "string" },
+        "speaker_id": { "type": "string" },
+        "language": { "type": "string" },
+        "channel": { "type": "string" },
+        "voice_ref": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "uri": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

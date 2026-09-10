@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echo.agent/protocol/echo.v1/hello.json",
+  "title": "hello / probe",
+  "type": "object",
+  "required": ["protocol", "slot", "impl", "version", "capabilities"],
+  "additionalProperties": true,
+  "properties": {
+    "protocol": { "const": "echo.v1" },
+    "slot": {
+      "enum": ["identity", "llm", "stt", "tts", "memory", "tools", "channel"]
+    },
+    "impl": { "type": "string", "description": "Имя реализации, не вендора ядра. Например zonos-chain." },
+    "version": { "type": "string" },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "blob_schemes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Какие uri слот умеет читать: blob, file, https"
+    }
+  }
+}

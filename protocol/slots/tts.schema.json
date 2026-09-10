@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echo.agent/protocol/echo.v1/slots/tts.json",
+  "title": "tts.synthesize",
+  "description": "Голос берётся из ctx.voice_ref. Слот не резолвит identity сам.",
+  "type": "object",
+  "required": ["text"],
+  "additionalProperties": true,
+  "properties": {
+    "text": { "type": "string", "minLength": 1 }
+  }
+}
